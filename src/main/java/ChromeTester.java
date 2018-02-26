@@ -13,7 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
-public class ChromeTest {
+public class ChromeTester {
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -50,14 +50,14 @@ public class ChromeTest {
                         .until(ExpectedConditions
                                 .presenceOfAllElementsLocatedBy(
                                         By.cssSelector("a.button[title='Add to cart']")))
-                        .get(0).getTagName(), 12,
+                        .get(0).getText(), "a",
                 "Size not equal");
         softAssert.assertEquals(
                 wait
-                        .until(ExpectedConditions
-                                .presenceOfAllElementsLocatedBy(
-                                        By.cssSelector("a.button[title='Add to cart']")))
-                        .size(), 13,
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(
+                                By.cssSelector("a.button[title='Add to cart']")))
+                .size(), "test",
                 "Size not equal");
         softAssert.assertEquals(
                 wait
@@ -67,6 +67,7 @@ public class ChromeTest {
                         .size(), 14,
                 "Size not equal");
         softAssert.assertAll();
+        assert driver.findElements(By.cssSelector("li.ajax_block_product")).size() == 7;
 
     }
 
