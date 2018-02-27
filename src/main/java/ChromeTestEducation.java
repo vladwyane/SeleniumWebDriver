@@ -1,6 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,10 +14,11 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
-public class ChromeTester {
+public class ChromeTestEducation {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private HomePage homePage = new HomePage();
 
     @BeforeSuite
     public static void setupClass() {
@@ -42,15 +44,13 @@ public class ChromeTester {
     @Test
     public void test() {
         SoftAssert softAssert = new SoftAssert();
-
         driver.get("http://automationpractice.com");
 
         softAssert.assertEquals(
                 wait
                         .until(ExpectedConditions
                                 .presenceOfAllElementsLocatedBy(
-                                        By.cssSelector("a.button[title='Add to cart']")))
-                        .get(0).getText(), "a",
+                                        By.cssSelector("span.price-percent-reduction"))).get(0), "5%",
                 "Size not equal");
         softAssert.assertEquals(
                 wait
@@ -67,7 +67,6 @@ public class ChromeTester {
                         .size(), 14,
                 "Size not equal");
         softAssert.assertAll();
-        assert driver.findElements(By.cssSelector("li.ajax_block_product")).size() == 7;
 
     }
 

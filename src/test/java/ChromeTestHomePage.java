@@ -47,8 +47,6 @@ public class ChromeTestHomePage {
         inputSearch.sendKeys("dress");
         WebElement searchButton = driver.findElement(homePage.searchButton);
         searchButton.click();
-        assert driver.findElements(By.cssSelector("span.discount")).size() == 7;
-
+        assert driver.findElements(homePage.ajaxProduct).size() == 7;
     }
-
 }
