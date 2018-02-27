@@ -47,6 +47,15 @@ public class ChromeTestHomePage {
         inputSearch.sendKeys("dress");
         WebElement searchButton = driver.findElement(homePage.searchButton);
         searchButton.click();
-        assert driver.findElements(homePage.ajaxProduct).size() == 7;
+        softAssert.assertEquals(
+                wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        homePage.ajaxProduct)).size(), 7, "Size not equal");
+        softAssert.assertEquals(
+                wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        homePage.ajaxProduct)).size(), 5, "Size not equal");
+        softAssert.assertEquals(
+                wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        homePage.ajaxProduct)).size(), 1, "Size not equal");
+        softAssert.assertAll();
     }
 }
